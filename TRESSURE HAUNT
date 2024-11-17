@@ -1,1 +1,68 @@
+import random
+
+def treasure_hunt():
+    print("🌴 Welcome to the Island of Lost Treasures! 🏝️")
+    print("You are an adventurer seeking a hidden treasure buried somewhere on this mysterious island.")
+    print("Clues left by an ancient explorer will guide you, but be careful—time is running out!")
+    print("You have 10 chances to find the treasure. Let the adventure begin!\n")
+
+    # Generate a 5x5 grid and hide the treasure
+    grid_size = 5
+    treasure_row = random.randint(0, grid_size - 1)
+    treasure_col = random.randint(0, grid_size - 1)
+
+    attempts = 10
+
+    # Ancient explorer's clue system
+    def explorer_clue(guess_row, guess_col):
+        row_diff = treasure_row - guess_row
+        col_diff = treasure_col - guess_col
+
+        clues = []
+        if row_diff > 0:
+            clues.append("Head further south.")
+        elif row_diff < 0:
+            clues.append("Move back to the north.")
+
+        if col_diff > 0:
+            clues.append("The treasure lies to the east.")
+        elif col_diff < 0:
+            clues.append("Go west, adventurer.")
+
+        if not clues:
+            return "The ground beneath your feet feels warm... You've found it!"
+        return "Ancient clue: " + " ".join(clues)
+
+    while attempts > 0:
+        print(f"\n🪙 You have {attempts} chances left.")
+        print("Enter your guess (row and column, 0-4):")
+
+        try:
+            # Player's guess
+            guess_row = int(input("Row: "))
+            guess_col = int(input("Column: "))
+
+            if guess_row < 0 or guess_row >= grid_size or guess_col < 0 or guess_col >= grid_size:
+                print("❌ Invalid input! Please enter numbers between 0 and 4.")
+                continue
+
+            attempts -= 1
+
+            # Check if the player finds the treasure
+            if guess_row == treasure_row and guess_col == treasure_col:
+                print(f"🎉 You strike gold! The treasure is at ({treasure_row}, {treasure_col}). You are victorious!")
+                break
+
+            # Provide a cryptic clue
+            clue = explorer_clue(guess_row, guess_col)
+            print(f"📜 {clue}")
+
+        except ValueError:
+            print("❌ Invalid input! Please enter numbers only.")
+
+    if attempts == 0:
+        print(f"\n💔 Time's up! The treasure remains buried at ({treasure_row}, {treasure_col}).")
+
+# Start the game
+treasure_hunt()
 
