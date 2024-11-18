@@ -1,7 +1,7 @@
 import random
 
 def treasure_hunt():
-    print("🌴 Welcome to the Island of Lost Treasures! 🏝️")
+    print(" Welcome to the Island of Lost Treasures! ")
     print("You are an adventurer seeking a hidden treasure buried somewhere on this mysterious island.")
     print("Clues left by an ancient explorer will guide you, but be careful—time is running out!")
     print("You have 10 chances to find the treasure. Let the adventure begin!\n")
@@ -43,25 +43,25 @@ def treasure_hunt():
             guess_col = int(input("Column: "))
 
             if guess_row < 0 or guess_row >= grid_size or guess_col < 0 or guess_col >= grid_size:
-                print("❌ Invalid input! Please enter numbers between 0 and 4.")
+                print(" Invalid input! Please enter numbers between 0 and 4.")
                 continue
 
             attempts -= 1
 
             # Check if the player finds the treasure
             if guess_row == treasure_row and guess_col == treasure_col:
-                print(f"🎉 You strike gold! The treasure is at ({treasure_row}, {treasure_col}). You are victorious!")
+                print(f" You strike gold! The treasure is at ({treasure_row}, {treasure_col}). You are victorious!")
                 break
 
             # Provide a cryptic clue
             clue = explorer_clue(guess_row, guess_col)
-            print(f"📜 {clue}")
+            print(f" {clue}")
 
         except ValueError:
-            print("❌ Invalid input! Please enter numbers only.")
+            print("Invalid input! Please enter numbers only.")
 
     if attempts == 0:
-        print(f"\n💔 Time's up! The treasure remains buried at ({treasure_row}, {treasure_col}).")
+        print(f"\n Time's up! The treasure remains buried at ({treasure_row}, {treasure_col}).")
 
 # Start the game
 treasure_hunt()
